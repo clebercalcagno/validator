@@ -1,0 +1,15 @@
+{
+  "name": "calcagno/validator",
+  "autoload": {
+    "psr-4": {
+      "Calcagno\\Validator\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Cleber Calcagno",
+      "email": "cleber.calcagno@gmail.com.br"
+    }
+  ],
+  "require": {}
+}
