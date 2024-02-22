@@ -804,7 +804,7 @@ final class Validator
     return $this;
   }
 
-  public function custom(callable $function, string $message): self
+  public function custom(callable $function, string $message, array $args = []): self
   {
     $value = $this->_data['value'];
 
@@ -812,7 +812,7 @@ final class Validator
       return $this;
     }
 
-    $result = $function();
+    $result = call_user_func_array($function, $args);
 
     if (!is_bool($result)) {
       throw new InvalidArgumentException('A função passada deve retornar um booleano.');
