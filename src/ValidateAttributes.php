@@ -8,6 +8,43 @@ use InvalidArgumentException;
 
 trait ValidateAttributes
 {
+  public function validateFullName(string $value)
+  {
+    if (is_null($value) || empty($value)) {
+      return true;
+    }
+
+    $value = trim($value);
+
+    if (mb_strlen($value, 'UTF-8') < 5 || mb_strlen($value, 'UTF-8') > 255) {
+      return false;
+    }
+
+    if (!preg_match('/^[\p{L} ]+$/u', $value)) {
+      return false;
+    }
+
+    $slices = explode(' ', $value);
+
+    if (count($slices) < 2) {
+      return false;
+    }
+
+    foreach ($slices as $slice) {
+      if (mb_strlen($slice, 'UTF-8') < 2) {
+        return false;
+      }
+    }
+
+    if (mb_strlen($slices[0], 'UTF-8') < 3) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+
   public function validateCpf(string $value): bool
   {
     if (empty($value)) {

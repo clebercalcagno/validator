@@ -891,6 +891,14 @@ final class Validator
   }
 
 
+  function is_full_name(): self
+  {
+    if (!$this->validateFullName($this->_data['value'])) {
+      $this->set_error("Deve ser informado o nome completo!");
+    }
+    return $this;
+  }
+
   /**
    * Validate the data
    * @access public
