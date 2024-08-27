@@ -1,0 +1,20 @@
+{
+  "name": "calcagno/validator",
+  "description": "",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Calcagno\\Validator\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Cleber Calcagno",
+      "email": "cleber.recoliano@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4"
+  }
+}
+
