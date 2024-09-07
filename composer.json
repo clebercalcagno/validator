@@ -13,8 +13,13 @@
       "email": "cleber.recoliano@gmail.com"
     }
   ],
+  "scripts": {
+    "test": ".\\vendor\\bin\\phpunit tests"
+  },
   "require": {
     "php": "^7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6"
   }
 }
-

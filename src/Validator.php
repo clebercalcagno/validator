@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class for validation of data
  *
@@ -12,8 +14,9 @@ namespace Calcagno\Validator;
 
 use DateTime;
 
-class Validator
+final class Validator
 {
+  private ValidateAttributes $validator;
 
   protected $_data     = array();
   protected $_errors   = array();
@@ -27,6 +30,7 @@ class Validator
    */
   public function __construct()
   {
+    $this->validator = new ValidateAttributes();
     $this->set_messages_default();
     $this->define_pattern();
   }
@@ -499,6 +503,10 @@ class Validator
    */
   public function is_cpf()
   {
+    if (is_null($this->_data['value']) || empty($this->_data['value'])) {
+      return $this;
+    }
+
     $verify = true;
 
     $c = preg_replace('/\D/', '', $this->_data['value']);
@@ -786,6 +794,10 @@ class Validator
    */
   public function is_phone()
   {
+    if (is_null($this->_data['value'])) {
+      return $this;
+    }
+
     $verify = preg_match('/^(\(0?\d{2}\)\s?|0?\d{2}[\s.-]?)\d{4,5}[\s.-]?\d{4}$/', $this->_data['value']);
     if (!$verify) {
       $this->set_error(sprintf($this->_messages['is_phone'], $this->_data['name']));
