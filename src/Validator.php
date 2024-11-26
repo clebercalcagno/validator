@@ -287,6 +287,10 @@ final class Validator
    */
   public function is_email()
   {
+    if (is_null($this->_data['value']) || empty($this->_data['value'])) {
+      return $this;
+    }
+
     if (filter_var($this->_data['value'], FILTER_VALIDATE_EMAIL) === false) {
       $this->set_error(sprintf($this->_messages['is_email'], $this->_data['value']));
     }
@@ -703,6 +707,10 @@ final class Validator
    */
   public function is_date($format = null)
   {
+    if (is_null($this->_data['value'])) {
+      return $this;
+    }
+
     $verify = true;
     if ($this->_data['value'] instanceof DateTime) {
       return $this;
@@ -794,7 +802,7 @@ final class Validator
    */
   public function is_phone()
   {
-    if (is_null($this->_data['value'])) {
+    if (is_null($this->_data['value']) || empty($this->_data['value'])) {
       return $this;
     }
 
